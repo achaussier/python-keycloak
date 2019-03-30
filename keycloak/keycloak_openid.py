@@ -403,7 +403,8 @@ class KeycloakOpenID:
 
         for policy_name, policy in self.authorization.policies.items():
             for role in user_resources['roles']:
-                if self._build_name_role(role) in policy.roles:
+                policy_roles = [ item.name for item in policy.roles ]
+                if self._build_name_role(role) in policy_roles:
                     permissions += policy.permissions
 
         return list(set(permissions))
